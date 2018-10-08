@@ -1,8 +1,7 @@
-function Main()
+function Main_test1000()
     A = [1, 0, 0;
-         0, 5, 0;
-         0, 0, 5;];
-%     c = [11; -9; 13;];
+         0, 5, -2;
+         0, -2, 5;];
     
     s = 0;
     e = pi/2;
@@ -15,7 +14,6 @@ function Main()
     for psi = s : step : e
         for fi = s : step : e
             c = distance*[cos(fi)*cos(psi); sin(fi)*cos(psi); sin(psi);];
-%             c = [0; 0; 3;];
             fun = Func(A, c);
             
             stz = StartPointZero(fun);
