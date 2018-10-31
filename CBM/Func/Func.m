@@ -1,5 +1,5 @@
 classdef Func    
-    properties(SetAccess = public)
+    properties(SetAccess = private)
         A;
         c;
     end
@@ -11,13 +11,15 @@ classdef Func
         end
         
         function res = Val(this, x)
-           res = (x - this.c).'*this.A*(x - this.c) - 1;
+           res = (x - this.c)' * this.A * (x - this.c) - 1;
         end
+        
         function res = Grad(this, x)
-            res = 2*this.A*(x - this.c);
+            res = 2 * this.A * (x - this.c);
         end
+        
         function res = H(this)
-            res = 2*this.A;
+            res = 2 * this.A;
         end 
     end
 end
