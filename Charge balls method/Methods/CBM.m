@@ -2,7 +2,7 @@ function result = CBM(fun, initialPoint) % Charged balls method
     EPS = 1e-6;
     EPS1 = 1e-8;
     EPS2 = 1e-2;
-    DELTA = 0.1;
+    DELTA = 1;
     p1 = 10;
     p2 = 5;
     
@@ -20,9 +20,9 @@ function result = CBM(fun, initialPoint) % Charged balls method
             
             condition = norm(x - xPrevMod) / norm(xPrevMod);
             if condition < EPS1
-                DELTA = DELTA * 13;
+                DELTA = DELTA * 2;
             elseif condition > EPS2
-                DELTA = DELTA / 1.395;
+                DELTA = DELTA / 2;
             else
                 break;
             end

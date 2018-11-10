@@ -1,8 +1,8 @@
 function result = CBM_constStep(fun, initialPoint) % Charged balls method with constant step
     EPS = 1e-6;
-    DELTA = 0.3;
-    p1 = 10;
-    p2 = 5;
+    DELTA = 0.25;
+    p1 = 20;
+    p2 = 1;
     
     x = initialPoint;
     z = zeros(length(x), 1);
