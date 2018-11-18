@@ -1,4 +1,4 @@
-function Tests_2set()
+function TwoSet()
     dimension = 3;
     time_CBM = 0;
     time_PM = 0;

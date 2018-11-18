@@ -1,12 +1,13 @@
-function Tests_1set()
-    time_BM = 0;
-    time_CBM_constStep = 0;
+function OneSet()
+%     time_BM = 0;
+%     time_CBM_constStep = 0;
     time_CBM_zeroMass = 0;
     time_CBM_zeroMass_Newton = 0;
     time_CBM_zeroMass_optimal = 0;
-    time_MyMethod = 0;
+    time_PM = 0;
+    time_Fletcher_Reeves = 0;
     
-    dim = 1000;
+    dim = 3;
     A = diag(1 + 4 * rand(dim, 1));
     
     for amount = 1 : 1
@@ -33,12 +34,16 @@ function Tests_1set()
         time_CBM_zeroMass_Newton = time_CBM_zeroMass_Newton + toc;
         
         tic;
-        CBM_zeroMass_optimal(fun, st);
+        CBM_zeroMass_optimal(fun, st)
         time_CBM_zeroMass_optimal = time_CBM_zeroMass_optimal + toc;
         
         tic;
-        MyMethod(fun, st);
-        time_MyMethod = time_MyMethod + toc;
+        PM_1set(fun);
+        time_PM = time_PM + toc;
+        
+        tic;
+        Fletcher_Reeves(fun, st)
+        time_Fletcher_Reeves = time_Fletcher_Reeves + toc;
     end
     
 %     fprintf("%g\n", time_BM);
@@ -46,7 +51,8 @@ function Tests_1set()
     fprintf("%g\n", time_CBM_zeroMass);
     fprintf("%g\n", time_CBM_zeroMass_Newton);
     fprintf("%g\n", time_CBM_zeroMass_optimal);
-    fprintf("%g\n", time_MyMethod);
+    fprintf("%g\n", time_PM);
+    fprintf("%g\n", time_Fletcher_Reeves);
 end
 
 function result = StartPointZero(fun)

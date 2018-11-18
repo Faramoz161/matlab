@@ -25,7 +25,7 @@ function result = OptimalDelta(fun, x, z) %Golden ratio
     LEFT_CONST = (3 - sqrt(5)) / 2;
     RIGHT_CONST = (sqrt(5) - 1) / 2;
     
-    b = 100;
+    b = 65;
     c = LEFT_CONST * b;
     d = RIGHT_CONST * b;
     
@@ -45,6 +45,5 @@ function result = OptimalDelta(fun, x, z) %Golden ratio
             return;
         end
     end
-    
     result = b;
 end
