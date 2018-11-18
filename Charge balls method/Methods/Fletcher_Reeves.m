@@ -2,11 +2,11 @@ function result = Fletcher_Reeves(fun, initialPoint)
     EPS = 1e-6;
     
     x = initialPoint;
-    d = -F_grad(fun, x);
+    d = - F_grad(fun, x);
     
     n = length(x);    
     iteration = 1;
-    while norm(Psi(fun, x)) > EPS
+    while norm(fun.Psi(x)) > EPS
         a = GoldenRatio(fun, x, d);
         nextX = x + a * d;
         
@@ -16,11 +16,9 @@ function result = Fletcher_Reeves(fun, initialPoint)
             b = 0;
         end
         
-        d = -F_grad(fun, nextX) + b * d;
+        d = - F_grad(fun, nextX) + b * d;
         iteration = iteration + 1;
-        
-        grad = fun.Grad(nextX);
-        x = nextX - grad * fun.Val(nextX) / norm(grad)^2;
+        x = nextX;
     end
     
     result = x;
@@ -32,7 +30,7 @@ function result = GoldenRatio(fun, x_, d_)
     RIGHT_CONST = (sqrt(5) - 1) / 2;
     
     a = 0;
-    b = 1;
+    b = 10;
     c = a + LEFT_CONST * (b - a);
     d = a + RIGHT_CONST * (b - a);
     
@@ -60,20 +58,10 @@ function result = GoldenRatio(fun, x_, d_)
     result = (a * b) / 2;
 end
 
-function result = Psi(fun, x)
-    gr = fun.Grad(x);
-    result = (gr * x' * gr / norm(gr)^2 - x) / norm(x)^3;
-end
-
 function result = F(fun, x)
     result = norm(x)^2 + fun.Val(x)^2;
 end
 
 function result = F_grad(fun, x)
     result = 2 * (x + fun.Val(x) * fun.Grad(x));
-end
-
-function result = F_H(fun, x)
-    grad = fun.Grad(x);
-    result = 2 * (eye(length(x)) + grad * grad' + fun.Val(x) * fun.H());
 end

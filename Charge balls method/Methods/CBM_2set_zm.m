@@ -1,4 +1,4 @@
-function result = CBM_2set_zm(fun_1, fun_2, initial_1, initial_2) % Charged balls method for 2 set
+function result = CBM_2set_zm(fun_1, fun_2, initial_1, initial_2) % Charged balls method with zero mass for 2 set
     EPS = 1e-6;
     DELTA = 10;
     
@@ -26,9 +26,4 @@ function result = Psi(fun, x_1, x_2)
     gr = fun.Grad(x_1);
     temp = x_1 - x_2;
     result = (gr * temp' * gr / norm(gr)^2 - temp) / norm(temp)^3;
-end
-
-function result = Hi(fun, x, z)
-    gr = fun.Grad(x);
-    result = gr * z' * fun.H() * z / norm(gr)^2;
 end

@@ -7,7 +7,7 @@ function result = CBM_constStep(fun, initialPoint) % Charged balls method with c
     x = initialPoint;
     z = zeros(length(x), 1);
     
-    while norm(Psi(fun, x)) > EPS
+    while norm(fun.Psi(x)) > EPS
         xPrev = x;
         zPrev = z;
         
@@ -15,18 +15,8 @@ function result = CBM_constStep(fun, initialPoint) % Charged balls method with c
         grad = fun.Grad(xPrevMod);
         
         x = xPrevMod - grad * fun.Val(xPrevMod) / norm(grad)^2;
-        z = zPrev + DELTA * (p1 * Psi(fun, xPrev) - p2 * zPrev - Hi(fun, xPrev, zPrev));
+        z = zPrev + DELTA * (p1 * fun.Psi(xPrev) - p2 * zPrev - fun.Hi(xPrev, zPrev));
     end
 
     result = x;
-end
-
-function result = Psi(fun, x)
-    gr = fun.Grad(x);
-    result = (gr * x' * gr / norm(gr)^2 - x) / norm(x)^3;
-end
-
-function result = Hi(fun, x, z)
-    gr = fun.Grad(x);
-    result = gr * z' * fun.H() * z / norm(gr)^2;
 end

@@ -4,8 +4,8 @@ function result = CBM_zeroMass(fun, initialPoint) % Charged balls method with ze
     
     x = initialPoint;
     
-    while norm(Psi(fun, x)) > EPS
-        z = Psi(fun, x);
+    while norm(fun.Psi(x)) > EPS
+        z = fun.Psi(x);
         xPrevMod = x + DELTA * z;
 
         grad = fun.Grad(xPrevMod);
@@ -13,9 +13,4 @@ function result = CBM_zeroMass(fun, initialPoint) % Charged balls method with ze
     end
 
     result = x;
-end
-
-function result = Psi(fun, x)
-    gr = fun.Grad(x);
-    result = (gr * x' * gr / norm(gr)^2 - x) / norm(x)^3;
 end

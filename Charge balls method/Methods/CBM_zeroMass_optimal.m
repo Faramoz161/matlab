@@ -1,8 +1,8 @@
-function result = CBM_zeroMass_optimal(fun, initialPoint) % Charged balls method with zero mass
+function result = CBM_zeroMass_optimal(fun, initialPoint) % Charged balls method with zero mass and optimal delta
     EPS = 1e-6;
     
     x = initialPoint;
-    z = Psi(fun, x);
+    z = fun.Psi(x);
     
     while norm(z) > EPS
         xPrevMod = x + OptimalDelta(fun, x, z) * z;
@@ -10,40 +10,23 @@ function result = CBM_zeroMass_optimal(fun, initialPoint) % Charged balls method
         grad = fun.Grad(xPrevMod);
         x = xPrevMod - grad * fun.Val(xPrevMod) / norm(grad)^2;
         
-        z = Psi(fun, x);
+        z = fun.Psi(x);
     end
 
     result = x;
 end
 
-function result = Psi(fun, x)
-    gr = fun.Grad(x);
-    result = (gr * x' * gr / norm(gr)^2 - x) / norm(x)^3;
-end
-
-function result = OptimalDelta(fun, x, z) %Golden ratio
-    LEFT_CONST = (3 - sqrt(5)) / 2;
-    RIGHT_CONST = (sqrt(5) - 1) / 2;
+function result = OptimalDelta(fun, x, z)
+    delta = 50;
+    lambda = 0.3;
     
-    b = 65;
-    c = LEFT_CONST * b;
-    d = RIGHT_CONST * b;
+    psi = norm(fun.Psi(x));
+    newPsi = norm(fun.Psi(x + delta * z));
     
-    psiC = Psi(fun, x + c * z);
-    psiD = Psi(fun, x + d * z);
-    
-    while b > 10
-        if norm(psiC) <= norm(psiD)
-            b = d;            
-            d = c;
-            c = LEFT_CONST * b;
-            
-            psiD = psiC;
-            psiC = Psi(fun, x + c * z);
-        else
-            result = d;
-            return;
-        end
+    while psi <= newPsi
+        delta = delta * lambda;
+        newPsi = norm(fun.Psi(x + delta * z));
     end
-    result = b;
+    
+    result = delta;
 end

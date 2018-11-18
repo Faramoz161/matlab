@@ -7,9 +7,9 @@ function result = CBM_zeroing(fun, initialPoint) % Charged balls method with zer
     p2 = 2;
     
     x = initialPoint;
-    z = DELTA * (p1 * Psi(fun, x) - Hi(fun, x, zeros(length(x), 1)));
+    z = DELTA * (p1 * fun.Psi(x) - fun.Hi(x, zeros(length(x), 1)));
     
-    while norm(Psi(fun, x)) > EPS
+    while norm(fun.Psi(x)) > EPS
         xPrev = x;
         zPrev = z;
 
@@ -28,22 +28,12 @@ function result = CBM_zeroing(fun, initialPoint) % Charged balls method with zer
             end
         end
         
-        z = zPrev + DELTA * (p1 * Psi(fun, xPrev) - p2 * zPrev - Hi(fun, xPrev, zPrev));
+        z = zPrev + DELTA * (p1 * fun.Psi(xPrev) - p2 * zPrev - fun.Hi(xPrev, zPrev));
         
         if norm(x) - norm(xPrev) > 0.1
-            z = DELTA * (p1 * Psi(fun, x) - Hi(fun, x, zeros(length(x), 1)));
+            z = DELTA * (p1 * fun.Psi(x) - fun.Hi(x, zeros(length(x), 1)));
         end
     end
     
     result = x;
-end
-
-function result = Psi(fun, x)
-    gr = fun.Grad(x);
-    result = (gr * x' * gr / norm(gr)^2 - x) / norm(x)^3;
-end
-
-function result = Hi(fun, x, z)
-    gr = fun.Grad(x);
-    result = gr * z' * fun.H() * z / norm(gr)^2;
 end
