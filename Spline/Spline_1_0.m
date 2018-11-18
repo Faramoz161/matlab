@@ -1,0 +1,38 @@
+% Spline 1,0
+
+amountPoints = [3 5 8 10];
+f = @(x) x - sin(x) - 0.25;
+a = -1;
+b = 1;
+
+for t = 1 : length(amountPoints)
+    figure(t);
+    hold on;
+    
+    n = amountPoints(t);
+    x = linspace(a, b, n);
+    y = f(x);
+    
+    max_dev = 0;
+    
+    for i = 1 : n - 1
+        X = [    x(i) 1; 
+             x(i + 1) 1;];
+        Y = [    y(i);
+             y(i + 1);];
+        A = X \ Y;
+        
+        spline = @(x) A(1) * x + A(2);
+        check = linspace(x(i), x(i + 1));
+        plot(check,      f(check), 'r-');
+        plot(check, spline(check), 'k-');
+        
+        fmax = @(x) abs(f(x) - spline(x));
+        max_dev = max(max(fmax(check)), max_dev);
+    end
+
+    fprintf("n = %2i   max_dev = %1.6f\n", n, max_dev);
+    plot(x, y, 'b*');
+end
+
+clear;
