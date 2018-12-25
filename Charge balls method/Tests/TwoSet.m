@@ -8,7 +8,7 @@ function TwoSet()
     
     for amount = 1 : 1000
         c = 2 * (rand(dim, 1) - 0.5);
-        distance = 5.1 + 4 * rand();
+        distance = 5.1;
         c = c / norm(c) * distance;
         
         fun_1 = Func(A_1, c);

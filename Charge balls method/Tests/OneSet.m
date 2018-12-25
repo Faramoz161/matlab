@@ -1,6 +1,7 @@
 function OneSet()
     time_BM = 0;
     time_CBM_constStep = 0;
+    time_CBM_zeroing = 0;
     time_CBM_zeroMass = 0;
     time_CBM_zeroMass_Newton = 0;
     time_CBM_zeroMass_optimal = 0;
@@ -9,44 +10,50 @@ function OneSet()
     dim = 3;
     A = diag(1 + 4 * rand(dim, 1));
     
-    for amount = 1 : 1000
+    for amount = 1 : 1
         c = 2 * rand(dim, 1) - 1;
-        c = c / norm(c) * 6;
-        
+        distance = 5.1;
+        c = c / norm(c) * distance;
+
         fun = Func(A, c);
         st = StartPointZero(fun);
+
+%         tic;
+        BM(fun, st)
+%         time_BM = time_BM + toc;
+%         
+%         tic;
+%         CBM_constStep(fun, st);
+%         time_CBM_constStep = time_CBM_constStep + toc;
+% 
+%         tic;
+%         CBM_zeroing(fun, st);
+%         time_CBM_zeroing = time_CBM_zeroing + toc;
+% 
+%         tic;
+%         CBM_zeroMass(fun, st);
+%         time_CBM_zeroMass = time_CBM_zeroMass + toc;
+%         
+%         tic;
+%         CBM_zeroMass_Newton(fun, st);
+%         time_CBM_zeroMass_Newton = time_CBM_zeroMass_Newton + toc;
+%         
+%         tic;
+%         CBM_zeroMass_optimal(fun, st);
+%         time_CBM_zeroMass_optimal = time_CBM_zeroMass_optimal + toc;
         
         tic;
-        BM(fun, st);
-        time_BM = time_BM + toc;
-        
-        tic;
-        CBM_constStep(fun, st);
-        time_CBM_constStep = time_CBM_constStep + toc;
-        
-        tic;
-        CBM_zeroMass(fun, st);
-        time_CBM_zeroMass = time_CBM_zeroMass + toc;
-        
-        tic;
-        CBM_zeroMass_Newton(fun, st);
-        time_CBM_zeroMass_Newton = time_CBM_zeroMass_Newton + toc;
-        
-        tic;
-        CBM_zeroMass_optimal(fun, st);
-        time_CBM_zeroMass_optimal = time_CBM_zeroMass_optimal + toc;
-        
-        tic;
-        PM_1set(fun);
+        PM_1set_Fletcher_Reeves(fun, st);
         time_PM = time_PM + toc;
     end
     
-    fprintf("%g\n", time_BM / amount);
-    fprintf("%g\n", time_CBM_constStep / amount);
-    fprintf("%g\n", time_CBM_zeroMass / amount);
-    fprintf("%g\n", time_CBM_zeroMass_Newton / amount);
-    fprintf("%g\n", time_CBM_zeroMass_optimal / amount);
-    fprintf("%g\n", time_PM / amount);
+    fprintf("BM:                   %g\n", time_BM / amount);
+    fprintf("CBM_constStep:        %g\n", time_CBM_constStep / amount);
+    fprintf("CBM_zeroing:          %g\n", time_CBM_zeroing / amount);
+    fprintf("CBM_zeroMass:         %g\n", time_CBM_zeroMass / amount);
+    fprintf("CBM_zeroMass_Newton:  %g\n", time_CBM_zeroMass_Newton / amount);
+    fprintf("CBM_zeroMass_optimal: %g\n", time_CBM_zeroMass_optimal / amount);
+    fprintf("PM:                   %g\n", time_PM / amount);
 end
 
 function result = StartPointZero(fun)

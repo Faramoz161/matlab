@@ -1,4 +1,6 @@
-function result = PM_2set(fun_1, fun_2) % Penalty method for 2 set
+function result = PM_2set(fun_1, fun_2)
+    % Penalty method for 2 set
+    
     EPS = 1e-6;
     
     n = length(fun_1.c);
@@ -44,7 +46,7 @@ function result = F_H(fun_1, fun_2, z, r)
     term_1 = 2 * [ eye(n), -eye(n); 
                   -eye(n),  eye(n);];
     term_2 = 2 * r * [grad_1 * grad_1' + fun_1.Val(x) * fun_1.H(), zeros(n);
-                                                         zeros(n), grad_2 * grad_2' + fun_2.Val(y) * fun_2.H();];
+                      zeros(n), grad_2 * grad_2' + fun_2.Val(y) * fun_2.H();];
     
     result = term_1 + term_2;
 end

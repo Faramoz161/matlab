@@ -4,7 +4,7 @@ function result = PM_1set(fun) % Penalty method
     n = length(fun.c);
     x = zeros(n, 1);
     r = 1;
-    
+
     while H(fun, x) > EPS
         
         while norm(F_grad(fun, x, r)) > EPS / 10

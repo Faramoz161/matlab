@@ -1,4 +1,6 @@
-function result = CBM(fun, initialPoint) % Charged balls method
+function result = CBM(fun, initialPoint)
+    % Charged balls method
+    
     EPS = 1e-6;
     EPS1 = 1e-8;
     EPS2 = 1e-2;
@@ -12,7 +14,7 @@ function result = CBM(fun, initialPoint) % Charged balls method
     while norm(fun.Psi(x)) > EPS
         xPrev = x;
         zPrev = z;
-
+        
         while 1
             xPrevMod = xPrev + DELTA * zPrev;
             grad = fun.Grad(xPrevMod);

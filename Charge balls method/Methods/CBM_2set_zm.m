@@ -1,4 +1,6 @@
-function result = CBM_2set_zm(fun_1, fun_2, initial_1, initial_2) % Charged balls method with zero mass for 2 set
+function result = CBM_2set_zm(fun_1, fun_2, initial_1, initial_2)
+    % Charged balls method with zero mass for 2 set
+    
     EPS = 1e-6;
     DELTA = 10;
     
@@ -9,16 +11,16 @@ function result = CBM_2set_zm(fun_1, fun_2, initial_1, initial_2) % Charged ball
         z_1 = Psi(fun_1, x_1, x_2);
         z_2 = Psi(fun_2, x_2, x_1);
         
-        x_1_PrevMod = x_1 + DELTA * z_1;
-        x_2_PrevMod = x_2 + DELTA * z_2;
+        x_1_Mod = x_1 + DELTA * z_1;
+        x_2_Mod = x_2 + DELTA * z_2;
         
-        grad_1 = fun_1.Grad(x_1_PrevMod);
-        grad_2 = fun_2.Grad(x_2_PrevMod);
+        grad_1 = fun_1.Grad(x_1_Mod);
+        grad_2 = fun_2.Grad(x_2_Mod);
         
-        x_1 = x_1_PrevMod - grad_1 * fun_1.Val(x_1_PrevMod) / norm(grad_1)^2;
-        x_2 = x_2_PrevMod - grad_2 * fun_2.Val(x_2_PrevMod) / norm(grad_2)^2;
+        x_1 = x_1_Mod - grad_1 * fun_1.Val(x_1_Mod) / norm(grad_1)^2;
+        x_2 = x_2_Mod - grad_2 * fun_2.Val(x_2_Mod) / norm(grad_2)^2;
     end
-    
+
     result = norm(x_1 - x_2);
 end
 
