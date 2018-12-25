@@ -35,7 +35,8 @@ for t = 1 : length(amountPoints)
     
     max_dev = 0;
     for i = 1 : n - 1
-        spline = @(z) y(i) + y_1(i) * (z - x(i)) + y_2(i) * (z - x(i)).^2 / 2 + (y_2(i + 1) - y_2(i)) * (z - x(i)).^3 / 6 / h;
+        spline = @(z) y(i) + y_1(i) * (z - x(i)) + y_2(i) * (z - x(i)).^2 / 2 ...
+                      + (y_2(i + 1) - y_2(i)) * (z - x(i)).^3 / 6 / h;
         check = linspace(x(i), x(i + 1));
         plot(check,      f(check), 'r-');
         plot(check, spline(check), 'k-');
