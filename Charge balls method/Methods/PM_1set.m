@@ -7,7 +7,7 @@ function result = PM_1set(fun)
     x = zeros(n, 1);
     r = 1;
 
-    while H(fun, x) > EPS
+    while fun.Psi(x) > EPS
         
         while norm(F_grad(fun, x, r)) > EPS / 10
             x = x - F_H(fun, x, r) \ F_grad(fun, x, r);
@@ -26,8 +26,4 @@ end
 function result = F_H(fun, x, r)
     grad = fun.Grad(x);
     result = 2 * (eye(length(x)) + r * (grad * grad' + fun.Val(x) * fun.H()));
-end
-
-function result = H(fun, x)
-    result = fun.Val(x)^2;
 end
