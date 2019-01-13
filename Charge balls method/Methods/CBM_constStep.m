@@ -2,7 +2,7 @@ function result = CBM_constStep(fun, initialPoint)
     % Charged balls method with constant step
     
     EPS = 1e-6;
-    DELTA = 0.2;
+    DELTA = 0.25;
     p1 = 10;
     p2 = 1;
     

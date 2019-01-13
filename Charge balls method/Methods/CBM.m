@@ -5,8 +5,8 @@ function result = CBM(fun, initialPoint)
     EPS1 = 1e-8;
     EPS2 = 1e-2;
     DELTA = 1;
-    p1 = 10;
-    p2 = 5;
+    p1 = 20;
+    p2 = 1;
     
     x = initialPoint;
     z = DELTA * (p1 * fun.Psi(x) - fun.Hi(x, zeros(length(x), 1)));

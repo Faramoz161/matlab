@@ -7,10 +7,10 @@ function result = CBM_2set_zm(fun_1, fun_2, initial_1, initial_2)
     x_1 = initial_1;
     x_2 = initial_2;
     
-    while norm(Psi(fun_1, x_1, x_2))^2 + norm(Psi(fun_2, x_2, x_1))^2 > EPS
-        z_1 = Psi(fun_1, x_1, x_2);
-        z_2 = Psi(fun_2, x_2, x_1);
-        
+    z_1 = Psi(fun_1, x_1, x_2);
+    z_2 = Psi(fun_2, x_2, x_1);
+    
+    while norm(z_1)^2 + norm(z_2)^2 > EPS
         x_1_Mod = x_1 + DELTA * z_1;
         x_2_Mod = x_2 + DELTA * z_2;
         
@@ -19,6 +19,11 @@ function result = CBM_2set_zm(fun_1, fun_2, initial_1, initial_2)
         
         x_1 = x_1_Mod - grad_1 * fun_1.Val(x_1_Mod) / norm(grad_1)^2;
         x_2 = x_2_Mod - grad_2 * fun_2.Val(x_2_Mod) / norm(grad_2)^2;
+        
+        z_1 = Psi(fun_1, x_1, x_2);
+        z_2 = Psi(fun_2, x_2, x_1);
+        
+        DELTA = DELTA * 0.99;
     end
 
     result = norm(x_1 - x_2);

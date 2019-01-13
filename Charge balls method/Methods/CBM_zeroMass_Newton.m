@@ -2,7 +2,7 @@ function result = CBM_zeroMass_Newton(fun, initialPoint)
     % Charged balls method with zero mass
     
     EPS = 1e-6;
-    DELTA = 0.5;
+    DELTA = 1;
     
     x = initialPoint;
     z = zeros(length(x), 1);

@@ -1,4 +1,6 @@
-function result = PM_1set(fun) % Penalty method
+function result = PM_1set(fun) 
+    % Penalty method
+    
     EPS = 1e-6;
     
     n = length(fun.c);

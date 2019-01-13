@@ -13,7 +13,6 @@ function result = CBM_zeroing(fun, initialPoint)
         xPrevMod = xPrev + DELTA * z;
         grad = fun.Grad(xPrevMod);
         x = xPrevMod - grad * fun.Val(xPrevMod) / (norm(grad)^2);
-
         z = DELTA * (p1 * fun.Psi(x) - fun.Hi(xPrev, zeros(length(x), 1)));
     end
     

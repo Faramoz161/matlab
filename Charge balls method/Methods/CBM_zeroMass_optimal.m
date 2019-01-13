@@ -1,4 +1,6 @@
-function result = CBM_zeroMass_optimal(fun, initialPoint) % Charged balls method with zero mass and optimal delta
+function result = CBM_zeroMass_optimal(fun, initialPoint) 
+    % Charged balls method with zero mass and optimal delta
+    
     EPS = 1e-6;
     
     x = initialPoint;
@@ -19,11 +21,11 @@ function result = OptimalDelta(fun, x, z)
     lambda = 0.5;
     
     psi = norm(fun.Psi(x));
-    newPsi = norm(fun.Psi(x + delta * z));
+    newPsi = fun.Psi(x + delta * z);
     
-    while psi <= newPsi
+    while psi <= norm(newPsi)
         delta = delta * lambda;
-        newPsi = norm(fun.Psi(x + delta * z));
+        newPsi = fun.Psi(x + delta * z);
     end
     
     result = delta;
