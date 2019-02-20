@@ -17,7 +17,7 @@ function result = BM(fun, initialPoint)
         a = cA * c;
         b = -2 * cA * fun.c;
         
-        D = b^2 - 4 * a * d;
+        D = b^2 - (4 * d) * a;
         t = (-b - sqrt(D)) / (2 * a);
         
         x = t * c;

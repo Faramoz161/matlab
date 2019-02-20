@@ -26,8 +26,8 @@ function TwoSet()
         time_PM = time_PM + toc;
     end
     
-    fprintf('%g\n', time_CBM / amount);
-    fprintf('%g\n', time_PM / amount);
+    fprintf("CBM_2set_zm: %g\n", time_CBM / amount);
+    fprintf("PM_2set:     %g\n", time_PM / amount);
 end
 
 function result = StartPointZero(fun)

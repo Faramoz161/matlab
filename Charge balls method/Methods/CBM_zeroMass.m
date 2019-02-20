@@ -13,7 +13,7 @@ function result = CBM_zeroMass(fun, initialPoint)
         x = xMod - grad * fun.Val(xMod) / norm(grad)^2;
         z = fun.Psi(x);
         
-        DELTA = DELTA * 0.99;
+        DELTA = DELTA * 0.999;
     end
 
     result = x;

@@ -21,8 +21,7 @@ end
 function result = F(fun, x, z)
     p1 = 10;
     p2 = 1;
-    gr = fun.Grad(x);
-    result = p1 * fun.Psi(x) - p2 * z - gr * z.' * fun.H() * z / norm(gr)^2;
+    result = p1 * fun.Psi(x) - p2 * z - fun.Hi(x, z);
 end
 
 function result = gradF(fun, x, z)

@@ -1,11 +1,11 @@
 function OneSet()
-    time_BM = 0;
-    time_CBM_constStep = 0;
-    time_CBM_zeroing = 0;
-    time_CBM_zeroMass = 0;
-    time_CBM_zeroMass_Newton = 0;
+    time_BM                   = 0;
+    time_CBM_constStep        = 0;
+    time_CBM_zeroing          = 0;
+    time_CBM_zeroMass         = 0;
+    time_CBM_zeroMass_Newton  = 0;
     time_CBM_zeroMass_optimal = 0;
-    time_PM = 0;
+    time_PM                   = 0;
     
     dim = 3;
     A = diag(1 + 4 * rand(dim, 1));
@@ -16,34 +16,34 @@ function OneSet()
         c = c / norm(c) * distance;
 
         fun = Func(A, c);
-        st = StartPointZero(fun);
+        startPoint = StartPointZero(fun);
 
         tic;
-        BM(fun, st);
+        BM(fun, startPoint);
         time_BM = time_BM + toc;
         
         tic;
-        CBM_constStep(fun, st);
+        CBM_constStep(fun, startPoint);
         time_CBM_constStep = time_CBM_constStep + toc;
 
         tic;
-        CBM_zeroing(fun, st);
+        CBM_zeroing(fun, startPoint);
         time_CBM_zeroing = time_CBM_zeroing + toc;
-
-        tic;
-        CBM_zeroMass(fun, st);
-        time_CBM_zeroMass = time_CBM_zeroMass + toc;
         
         tic;
-        CBM_zeroMass_Newton(fun, st);
+        CBM_zeroMass(fun, startPoint);
+        time_CBM_zeroMass = time_CBM_zeroMass + toc;
+
+        tic;
+        CBM_zeroMass_Newton(fun, startPoint);
         time_CBM_zeroMass_Newton = time_CBM_zeroMass_Newton + toc;
         
         tic;
-        CBM_zeroMass_optimal(fun, st);
+        CBM_zeroMass_optimal(fun, startPoint);
         time_CBM_zeroMass_optimal = time_CBM_zeroMass_optimal + toc;
         
         tic;
-        PM_1set(fun);
+        PM_1set(fun, startPoint);
         time_PM = time_PM + toc;
     end
     

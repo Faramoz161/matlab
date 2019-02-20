@@ -1,18 +1,20 @@
-function result = PM_1set(fun) 
+function result = PM_1set(fun, initialPoint) 
     % Penalty method
+    % F = norm(x)^2 + r * fun.Val(x)^2
     
     EPS = 1e-6;
     
-    n = length(fun.c);
-    x = zeros(n, 1);
+    x = initialPoint;
     r = 1;
 
-    while fun.Psi(x) > EPS
+    while norm(fun.Psi(x)) > EPS
         
         while norm(F_grad(fun, x, r)) > EPS / 10
             x = x - F_H(fun, x, r) \ F_grad(fun, x, r);
         end
 
+        grad = fun.Grad(x);
+        x = x - grad *fun.Val(x) / norm(grad)^2;
         r = r * 10;
     end
     
