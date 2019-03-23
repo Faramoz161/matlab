@@ -1,5 +1,5 @@
-function result = BM(fun, initialPoint) 
-    % Balls method
+% Balls method
+function result = BM(fun, initialPoint)
 
     EPS = 1e-6;
     normA = norm(fun.A);

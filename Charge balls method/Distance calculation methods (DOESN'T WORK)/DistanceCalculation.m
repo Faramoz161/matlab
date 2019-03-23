@@ -1,4 +1,4 @@
-function TwoSet()
+function DistanceCalculation()
     time_CBM = 0;
     time_PM = 0;
     
@@ -6,7 +6,7 @@ function TwoSet()
     A_1 = diag(1 + 4 * rand(dim, 1));
     A_2 = diag(1 + 4 * rand(dim, 1));
     
-    for amount = 1 : 1000
+    for amount = 1 : 1
         c = 2 * (rand(dim, 1) - 0.5);
         distance = 5.1;
         c = c / norm(c) * distance;
@@ -18,12 +18,14 @@ function TwoSet()
         sp_Y = StartPointZero(fun_2);
 
         tic;
-        CBM_2set_zm(fun_1, fun_2, sp_X, sp_Y);
+        CBM_2set_zm(fun_1, fun_2, sp_X, sp_Y)
         time_CBM = time_CBM + toc;
 
         tic;
-        PM_2set(fun_1, fun_2);
+        PM_2set(fun_1, fun_2)
         time_PM = time_PM + toc;
+        
+        BM_2set(fun_1, fun_2)
     end
     
     fprintf("CBM_2set_zm: %g\n", time_CBM / amount);

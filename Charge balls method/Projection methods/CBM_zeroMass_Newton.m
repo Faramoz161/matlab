@@ -1,14 +1,14 @@
+% Charged ball method with zero mass (using Newton's method)
 function result = CBM_zeroMass_Newton(fun, initialPoint)
-    % Charged balls method with zero mass
-    
+
     EPS = 1e-6;
     DELTA = 1;
     
     x = initialPoint;
     z = zeros(length(x), 1);
     
-    while norm(fun.Psi(x)) > EPS
-        z = z - gradF(fun, x, z) \ F(fun, x ,z); % Newton step
+    while norm(Psi(fun, x)) > EPS
+        z = z - gradF(fun, x, z) \ F(fun, x ,z);
         
         xMod = x + DELTA * z;
         grad = fun.Grad(xMod);
@@ -21,7 +21,7 @@ end
 function result = F(fun, x, z)
     p1 = 10;
     p2 = 1;
-    result = p1 * fun.Psi(x) - p2 * z - fun.Hi(x, z);
+    result = p1 * Psi(fun, x) - p2 * z - Chi(fun, x, z);
 end
 
 function result = gradF(fun, x, z)

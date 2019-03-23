@@ -1,5 +1,5 @@
+% Charged balls method
 function result = CBM(fun, initialPoint)
-    % Charged balls method
     
     EPS = 1e-6;
     EPS1 = 1e-8;

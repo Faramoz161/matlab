@@ -23,7 +23,7 @@ function result = CBM_2set_zm(fun_1, fun_2, initial_1, initial_2)
         z_1 = Psi(fun_1, x_1, x_2);
         z_2 = Psi(fun_2, x_2, x_1);
         
-        DELTA = DELTA * 0.99;
+        DELTA = DELTA * 0.999;
     end
 
     result = norm(x_1 - x_2);
