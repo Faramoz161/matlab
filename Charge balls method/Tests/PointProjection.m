@@ -63,7 +63,7 @@ function PointProjection()
             
             % Penalty method
             tic;
-            PM_1set(fun, startpnt);
+            PM_projection(fun, startpnt);
             time_PM(i) = time_PM(i) + toc;
         end
     end
