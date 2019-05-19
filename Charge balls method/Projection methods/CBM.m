@@ -1,6 +1,4 @@
-% Charged balls method
-function result = CBM(fun, initialPoint)
-    
+function x = CBM(fun, initialPoint)
     EPS = 1e-6;
     EPS1 = 1e-8;
     EPS2 = 1e-2;
@@ -32,6 +30,4 @@ function result = CBM(fun, initialPoint)
         
         z = zPrev + DELTA * (p1 * fun.Psi(xPrev) - p2 * zPrev - fun.Hi(xPrev, zPrev));
     end
-
-    result = x;
 end

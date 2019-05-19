@@ -1,8 +1,6 @@
-% Charged ball method with zeroing of velocity
-function result = CBM_zeroing(fun, initialPoint)
-
+function x = CBM_zeroing(fun, initialPoint)
     EPS = 1e-6;
-    DELTA = 10;
+    DELTA = 8;
     
     x = initialPoint;
     z = Psi(fun, x);
@@ -14,6 +12,4 @@ function result = CBM_zeroing(fun, initialPoint)
         x = xMod - grad * fun.Val(xMod) / norm(grad)^2;
         z = Psi(fun, x);
     end
-    
-    result = x;
 end

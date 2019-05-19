@@ -1,11 +1,10 @@
-% Penalty method
-function result = PM_1set(fun, initialPoint)
+function x = PM_projection(fun, initialPoint)
     % F = norm(x)^2 + r * fun.Val(x)^2
     
     EPS = 1e-6;
     
     x = initialPoint;
-    r = 1;
+    r = 1000;
 
     while norm(Psi(fun, x)) > EPS
         
@@ -17,8 +16,6 @@ function result = PM_1set(fun, initialPoint)
         x = x - grad * fun.Val(x) / norm(grad)^2;
         r = r * 10;
     end
-    
-    result = x;
 end
 
 function result = F_grad(fun, x, r)

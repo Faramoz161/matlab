@@ -1,6 +1,4 @@
-% Charged ball method with zeroing of velocity ("optimal" step)
-function result = CBM_zeroMass_optimal(fun, initialPoint) 
-
+function x = CBM_zeroing_frag(fun, initialPoint) 
     EPS = 1e-6;
     
     x = initialPoint;
@@ -13,11 +11,9 @@ function result = CBM_zeroMass_optimal(fun, initialPoint)
         x = xMod - grad * fun.Val(xMod) / norm(grad)^2;
         z = Psi(fun, x);
     end
-
-    result = x;
 end
 
-function result = OptimalDelta(fun, x, z)
+function delta = OptimalDelta(fun, x, z)
     delta = 50;
     lambda = 0.4;
     
@@ -28,6 +24,4 @@ function result = OptimalDelta(fun, x, z)
         delta = delta * lambda;
         newPsi = norm(Psi(fun, x + delta * z));
     end
-    
-    result = delta;
 end

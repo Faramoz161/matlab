@@ -1,6 +1,4 @@
-% Balls method
-function result = BM(fun, initialPoint)
-
+function x = BM(fun, initialPoint)
     EPS = 1e-6;
     normA = norm(fun.A);
     
@@ -24,6 +22,4 @@ function result = BM(fun, initialPoint)
         grad = fun.Grad(x);
         tetta = acos((-x)' * grad / norm(x) / norm(grad));
     end
-    
-    result = x;
 end

@@ -14,18 +14,18 @@ classdef Func
         end
 
         % Calculation f(x)
-        function result = Val(this, x)
-           result = (x - this.c)' * this.A * (x - this.c) - 1;
+        function v = Val(this, x)
+           v = (x - this.c)' * this.A * (x - this.c) - 1;
         end
         
         % Gradient calculation
-        function result = Grad(this, x)
-            result = 2 * this.A * (x - this.c);
+        function gr = Grad(this, x)
+            gr = 2 * this.A * (x - this.c);
         end
         
         % Calculation of the matrix of second derivatives
-        function result = H(this)
-            result = 2 * this.A;
+        function h = H(this)
+            h = 2 * this.A;
         end
         
     end
