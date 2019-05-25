@@ -27,11 +27,8 @@ function PointProjection()
             A = diag(2 + 3 * rand(dim, 1));
             
             % Center of thera ellipse
-            corners = 2 * pi * [0; rand(dim - 1, 1)];
-            c = distance * cos(corners);
-            for k = 1 : dim - 1
-                c(1 : k) = c(1 : k) * sin(corners(k + 1));
-            end
+            c = normrnd(0, 1, dim, 1);
+            c = c / norm(c) * distance;
             
             % Set the ellipse
             fun = Func(A, c);
